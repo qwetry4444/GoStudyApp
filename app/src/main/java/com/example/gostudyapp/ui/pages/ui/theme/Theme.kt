@@ -1,6 +1,5 @@
-package com.example.gostudyapp.ui.Screens.ui.theme
+package com.example.gostudyapp.ui.pages.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

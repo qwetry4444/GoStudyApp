@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.Screens.ui.theme
+package com.example.gostudyapp.ui.pages.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

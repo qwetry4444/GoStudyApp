@@ -17,4 +17,7 @@
     <string name="textViewAuthWith">Авторизация с помощью:</string>
     <string name="buttonTextSurGUMail">Университетская почта СурГУ</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="contentDescriptionGmainLogo">GmailLogo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
