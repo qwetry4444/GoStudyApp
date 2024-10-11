@@ -12,7 +12,7 @@ import com.example.gostudyapp.ui.pages.LogInPage
 fun Navigation(modifier: Modifier, authViewModel: AuthViewModel) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "", builder = {
+    NavHost(navController = navController, startDestination = "login", builder = {
         composable("login") {
             LogInPage(modifier, navController, authViewModel)
         }

@@ -1,9 +1,5 @@
 package com.example.gostudyapp.ui.pages
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,10 +10,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -34,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gostudyapp.AuthViewModel
 import com.example.gostudyapp.R
-import com.example.gostudyapp.ui.pages.ui.theme.GoStudyAppTheme
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
 
@@ -43,19 +38,20 @@ import com.example.gostudyapp.ui.theme.ButtonGradientRight
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
-    Box(modifier = Modifier.padding(56.dp))
+    Box(modifier = Modifier.padding(56.dp).fillMaxSize())
     {
         Column(
             modifier = Modifier.align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
-                painter = painterResource(id = R.drawable.logo),
+                painter = painterResource(id = R.drawable.gostudy_logo),
                 contentDescription = stringResource(id = R.string.contentDescriptionLogo),
+                modifier = Modifier.size(width = 256.dp, height = 194.dp),
                 alignment = Alignment.Center,
             )
 
-            Spacer(modifier = Modifier.height(96.dp))
+            Spacer(modifier = Modifier.height(78.dp))
 
             TextField(
                 value = "",
@@ -87,7 +83,7 @@ fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authV
                 placeholder = { Text(text = stringResource(id = R.string.placeholderPassword))}
             )
             
-            Spacer(modifier = Modifier.height(96.dp))
+            Spacer(modifier = Modifier.height(52.dp))
 
             Box(modifier = Modifier
                 .size(width = 300.dp, height = 52.dp)
@@ -134,11 +130,20 @@ fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authV
                 {
                     Image(
                         painter = painterResource(id = R.drawable.gmail_logo),
-                        contentDescription = stringResource(id = R.string.contentDescriptionGmainLogo)
+                        contentDescription = stringResource(id = R.string.contentDescriptionGmailLogo)
                     )
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(text = stringResource(id = R.string.buttonTextSurGUMail))
                 }
             }
         }
     }
+}
+
+@Composable
+@Preview(showBackground = false)
+fun LoginPagePreview(){
+//    val authViewModel: AuthViewModel by viewModels()
+//    val navController = rememberNavController()
+//    LogInPage(Modifier, navController, authViewModel)
 }
