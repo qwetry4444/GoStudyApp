@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages
+package com.example.gostudyapp.ui.pages.SignIn
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,8 +38,13 @@ import com.example.gostudyapp.ui.theme.ButtonGradientRight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
-    Box(modifier = Modifier.padding(56.dp).fillMaxSize())
+fun LogInPage(modifier: Modifier = Modifier, navController: NavController, logInViewModel: LogInViewModel, authViewModel: AuthViewModel) {
+
+    val logInState = logInViewModel.uiState.collectAsState()
+
+    Box(modifier = Modifier
+        .padding(56.dp)
+        .fillMaxSize())
     {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -54,8 +60,8 @@ fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authV
             Spacer(modifier = Modifier.height(78.dp))
 
             TextField(
-                value = "",
-                onValueChange = {},
+                value = logInState.value.currentEmail,
+                onValueChange = { logInViewModel.onEmailInputChanged(it) },
                 colors = TextFieldDefaults.textFieldColors(
                     disabledTextColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
@@ -71,8 +77,8 @@ fun LogInPage(modifier: Modifier = Modifier, navController: NavController, authV
             Spacer(modifier = Modifier.height(32.dp))
 
             TextField(
-                value = "",
-                onValueChange = {},
+                value = logInState.value.currentPassword,
+                onValueChange = { logInViewModel.onEmailInputChanged(it) },
                 colors = TextFieldDefaults.textFieldColors(
                     disabledTextColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,

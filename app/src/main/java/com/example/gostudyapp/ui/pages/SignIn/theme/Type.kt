@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages.ui.theme
+package com.example.gostudyapp.ui.pages.SignIn.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

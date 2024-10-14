@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val authViewModel: AuthViewModel by viewModels()
+
         setContent {
             GoStudyAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

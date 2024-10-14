@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages.ui.theme
+package com.example.gostudyapp.ui.pages.SignIn.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
