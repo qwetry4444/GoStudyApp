@@ -1,22 +1,53 @@
 package com.example.gostudyapp.ui.navigation
 
-class Routes {
-}
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 
-sealed class Screen(val route: String) {
-    object Home : Screen("home")
-    object Player : Screen("player/{$ARG_EPISODE_URI}") {
-        fun createRoute(episodeUri: String) = "player/$episodeUri"
-    }
+//@Serializable
+//sealed class Routes {
+//    @Serializable
+//    object SignIn
+//    @Serializable
+//    object SignUp
+//    @Serializable
+//    object GoogleSignIn
+//    @Serializable
+//    object GoogleSignUp
+//    @Serializable
+//    object Home
+//    @Serializable
+//    data class Schedule(
+//        val studyGroup: String
+//    )
+//}
 
-    object PodcastDetails : Screen("podcast/{$ARG_PODCAST_URI}") {
+@Serializable
+object SignIn
+@Serializable
+object SignUp
+@Serializable
+object GoogleSignIn
+@Serializable
+object GoogleSignUp
+@Serializable
+object Home
+@Serializable
+data class Schedule(
+    val studyGroup: String
+)
 
-        val PODCAST_URI = "podcastUri"
-        fun createRoute(podcastUri: String) = "podcast/$podcastUri"
-    }
-
-    companion object {
-        val ARG_PODCAST_URI = "podcastUri"
-        val ARG_EPISODE_URI = "episodeUri"
-    }
-}
+//sealed class Screen(val route: String) {
+//    object SignIn : Screen("signIn")
+//    object SignUp : Screen("signUp")
+//    object GoogleSignIn : Screen("googleSignIn")
+//
+//    object Home : Screen("home")
+//
+//    object Schedule : Screen("schedule/{$ARG_STUDY_GROUP_URI}") {
+//        fun createRoute(scheduleUri: String) = "schedule/$scheduleUri"
+//    }
+//
+//    companion object {
+//        val ARG_STUDY_GROUP_URI = "studyGroupUri"
+//    }
+//}
