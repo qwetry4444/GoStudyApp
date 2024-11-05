@@ -1,7 +1,7 @@
 package com.example.gostudyapp.ui.pages.SignIn
 
 import androidx.lifecycle.ViewModel
-import com.example.gostudyapp.AuthViewModel
+import com.example.gostudyapp.ui.AuthViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

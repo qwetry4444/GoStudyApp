@@ -1,4 +1,4 @@
-package com.example.gostudyapp
+package com.example.gostudyapp.ui
 
 
 import androidx.lifecycle.LiveData

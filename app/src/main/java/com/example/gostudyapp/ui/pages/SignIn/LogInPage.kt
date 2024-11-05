@@ -15,10 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,24 +25,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.gostudyapp.AuthViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LogInPage(
     navController: NavController,
-    logInViewModel: LogInViewModel = hiltViewModel(),
-    authViewModel: AuthViewModel = hiltViewModel(),
+    //logInViewModel: LogInViewModel = hiltViewModel(),
+    //authViewModel: AuthViewModel = hiltViewModel(),
     modifier: Modifier = Modifier) {
-
-    val logInState = logInViewModel.uiState.collectAsState()
+    //val logInState = logInViewModel.uiState.collectAsState()
 
     Box(modifier = Modifier
         .padding(56.dp)
@@ -64,35 +57,35 @@ fun LogInPage(
 
             Spacer(modifier = Modifier.height(78.dp))
 
-            TextField(
-                value = logInState.value.currentEmail,
-                onValueChange = { logInViewModel.onEmailInputChanged(it) },
-                colors = TextFieldDefaults.textFieldColors(
-                    disabledTextColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
-                ),
-                modifier = Modifier
-                    .clip(RoundedCornerShape(12.dp)),
-
-                placeholder = { Text(text = stringResource(id = R.string.placeholderLogin)) }
-            )
+//            TextField(
+//                value = logInState.value.currentEmail,
+ //               onValueChange = { logInViewModel.onEmailInputChanged(it) },
+//                colors = TextFieldDefaults.textFieldColors(
+//                    disabledTextColor = Color.Transparent,
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    disabledIndicatorColor = Color.Transparent
+//                ),
+//                modifier = Modifier
+//                    .clip(RoundedCornerShape(12.dp)),
+//
+//                placeholder = { Text(text = stringResource(id = R.string.placeholderLogin)) }
+//            )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            TextField(
-                value = logInState.value.currentPassword,
-                onValueChange = { logInViewModel.onEmailInputChanged(it) },
-                colors = TextFieldDefaults.textFieldColors(
-                    disabledTextColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
-                ),
-                modifier = Modifier.clip(RoundedCornerShape(12.dp)),
-                placeholder = { Text(text = stringResource(id = R.string.placeholderPassword))}
-            )
+//            TextField(
+//                value = logInState.value.currentPassword,
+//                onValueChange = { logInViewModel.onEmailInputChanged(it) },
+////                colors = TextFieldDefaults.textFieldColors(
+////                    disabledTextColor = Color.Transparent,
+////                    focusedIndicatorColor = Color.Transparent,
+////                    unfocusedIndicatorColor = Color.Transparent,
+////                    disabledIndicatorColor = Color.Transparent
+////                ),
+//                modifier = Modifier.clip(RoundedCornerShape(12.dp)),
+//                placeholder = { Text(text = stringResource(id = R.string.placeholderPassword))}
+//            )
             
             Spacer(modifier = Modifier.height(52.dp))
 
