@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.gostudyapp.features.auth.presentation.GoogleSignIn.GoogleSignInPage
+import com.example.gostudyapp.features.auth.presentation.SignIn.LogInPage
 import com.example.gostudyapp.ui.navigation.GoogleSignIn
 import com.example.gostudyapp.ui.navigation.SignIn
-import com.example.gostudyapp.ui.pages.GoogleSignIn.GoogleSignInPage
-import com.example.gostudyapp.ui.pages.SignIn.LogInPage
 
 @Composable
 fun GoStudyApp(
@@ -20,7 +20,7 @@ fun GoStudyApp(
 
         NavHost(
             navController = navController,
-            startDestination = GoogleSignIn
+            startDestination = SignIn
         ) {
             composable<SignIn> {
                 LogInPage(navController)
@@ -29,6 +29,8 @@ fun GoStudyApp(
             composable<GoogleSignIn> {
                 GoogleSignInPage(navController, hiltViewModel())
             }
+
+
         }
 //    } else {
 //        OfflineDialog {

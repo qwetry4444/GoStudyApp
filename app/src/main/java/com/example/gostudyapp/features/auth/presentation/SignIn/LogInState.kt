@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages.SignIn
+package com.example.gostudyapp.features.auth.presentation.SignIn
 
 data class LogInState(
     var currentEmail: String = "",

@@ -1,7 +1,7 @@
-package com.example.gostudyapp.ui.pages.SignIn
+package com.example.gostudyapp.features.auth.presentation.SignIn
 
 import androidx.lifecycle.ViewModel
-import com.example.gostudyapp.ui.AuthViewModel
+import com.example.gostudyapp.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LogInViewModel @Inject constructor(
-    private val authViewModel: AuthViewModel
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LogInState())
     val uiState = _uiState.asStateFlow()

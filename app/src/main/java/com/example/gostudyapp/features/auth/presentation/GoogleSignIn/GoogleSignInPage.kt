@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages.GoogleSignIn
+package com.example.gostudyapp.features.auth.presentation.GoogleSignIn
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

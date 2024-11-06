@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui.pages.SignIn.theme
+package com.example.gostudyapp.features.auth.presentation.SignIn.theme
 
 import androidx.compose.ui.graphics.Color
 
