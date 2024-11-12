@@ -71,8 +71,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.firebase.auth)
 
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -82,11 +82,15 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+    // Navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.runtime.ktx)
     //implementation(libs.androidx.navigation.compose)
 
+    // Firebase
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
 
     // Dependency injection
     implementation("com.google.dagger:hilt-android:2.51.1")

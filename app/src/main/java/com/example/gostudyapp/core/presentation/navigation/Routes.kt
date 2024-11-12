@@ -1,7 +1,6 @@
-package com.example.gostudyapp.ui.navigation
+package com.example.gostudyapp.core.presentation.navigation
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 
 //@Serializable
 //sealed class Routes {
@@ -31,6 +30,7 @@ object GoogleSignIn
 object GoogleSignUp
 @Serializable
 object Home
+
 @Serializable
 data class Schedule(
     val studyGroup: String

@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gostudyapp.R
-import com.example.gostudyapp.features.auth.presentation.components.FormTextField
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
 
@@ -52,7 +51,7 @@ fun LogInPage(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
-                painter = painterResource(id = R.drawable.gostudy_logo),
+                painter = painterResource(id = R.drawable.gostudy_logo_with_title),
                 contentDescription = stringResource(id = R.string.contentDescriptionLogo),
                 modifier = Modifier.size(width = 256.dp, height = 194.dp),
                 alignment = Alignment.Center,
@@ -61,7 +60,6 @@ fun LogInPage(
             Spacer(modifier = Modifier.height(78.dp))
 
 
-            FormTextField(logInState.value.currentEmail, logInViewModel.onEmailInputChanged(it))
             TextField(
                 value = logInState.value.currentEmail,
                 onValueChange = { logInViewModel.onEmailInputChanged(it) },

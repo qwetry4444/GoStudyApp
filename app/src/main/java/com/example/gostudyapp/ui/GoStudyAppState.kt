@@ -16,21 +16,25 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.gostudyapp.ui.navigation.GoogleSignIn
+import com.example.gostudyapp.core.domain.GoogleAuthUiClient
+import com.example.gostudyapp.core.presentation.navigation.GoogleSignIn
+import com.google.android.gms.auth.api.identity.Identity
 
 //import com.example.gostudyapp.ui.navigation.Routes
 
 @Composable
 fun rememberGoStudyAppState(
     navController: NavHostController = rememberNavController(),
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    googleAuthUiClient: GoogleAuthUiClient = GoogleAuthUiClient(context, Identity.getSignInClient(context))
 ) = remember(navController, context) {
-    GoStudyAppState(navController, context)
+    GoStudyAppState(navController, context, googleAuthUiClient)
 }
 
 class GoStudyAppState(
     val navController: NavHostController,
-    private val context: Context
+    private val context: Context,
+    val googleAuthUiClient: GoogleAuthUiClient
 ) {
     var isOnline by mutableStateOf(checkIfOnline())
         private set
