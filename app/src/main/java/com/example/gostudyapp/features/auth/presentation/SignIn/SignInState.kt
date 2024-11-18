@@ -1,6 +1,6 @@
 package com.example.gostudyapp.features.auth.presentation.SignIn
 
-data class LogInState(
+data class SignInState(
     var currentEmail: String = "",
     var currentPassword: String = ""
 )

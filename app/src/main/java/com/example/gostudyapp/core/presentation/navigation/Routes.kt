@@ -21,20 +21,23 @@ import kotlinx.serialization.Serializable
 //}
 
 @Serializable
-object SignIn
-@Serializable
-object SignUp
-@Serializable
-object GoogleSignIn
-@Serializable
-object GoogleSignUp
-@Serializable
-object Home
+open class Route
 
 @Serializable
-data class Schedule(
+object SignIn : Route()
+@Serializable
+object SignUp : Route()
+@Serializable
+object GoogleSignIn : Route()
+@Serializable
+object GoogleSignUp : Route()
+@Serializable
+object Home : Route()
+
+@Serializable
+data class Schedule (
     val studyGroup: String
-)
+) : Route()
 
 //sealed class Screen(val route: String) {
 //    object SignIn : Screen("signIn")

@@ -1,4 +1,4 @@
-package com.example.gostudyapp.ui
+package com.example.gostudyapp
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,36 +6,33 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.gostudyapp.core.domain.GoogleAuthUiClient
-import com.example.gostudyapp.core.presentation.navigation.GoogleSignIn
-import com.google.android.gms.auth.api.identity.Identity
+import com.example.gostudyapp.core.presentation.navigation.Route
 
 //import com.example.gostudyapp.ui.navigation.Routes
 
 @Composable
 fun rememberGoStudyAppState(
     navController: NavHostController = rememberNavController(),
-    context: Context = LocalContext.current,
-    googleAuthUiClient: GoogleAuthUiClient = GoogleAuthUiClient(context, Identity.getSignInClient(context))
+    context: Context = LocalContext.current
 ) = remember(navController, context) {
-    GoStudyAppState(navController, context, googleAuthUiClient)
+    GoStudyAppState(navController, context)
 }
 
+@Stable
 class GoStudyAppState(
     val navController: NavHostController,
-    private val context: Context,
-    val googleAuthUiClient: GoogleAuthUiClient
+    private val context: Context
 ) {
+
     var isOnline by mutableStateOf(checkIfOnline())
         private set
 
@@ -43,14 +40,26 @@ class GoStudyAppState(
         isOnline = checkIfOnline()
     }
 
-    fun navigateToGoogleSignIn(from: NavBackStackEntry){
-        if (from.lifecycle.currentState == Lifecycle.State.RESUMED){
-            navController.navigate(GoogleSignIn)
+    fun popUp() {
+        navController.popBackStack()
+    }
+
+    fun navigate(route: Route) {
+        navController.navigate(route) { launchSingleTop = true }
+    }
+
+    fun navigateAndPopUp(route: Route, popUp: Route) {
+        navController.navigate(route) {
+            launchSingleTop = true
+            popUpTo(popUp) { inclusive = true }
         }
     }
 
-    fun navigateBack(){
-        navController.popBackStack()
+    fun clearAndNavigate(route: String) {
+        navController.navigate(route) {
+            launchSingleTop = true
+            popUpTo(0) { inclusive = true }
+        }
     }
 
     @SuppressLint("ObsoleteSdkInt")

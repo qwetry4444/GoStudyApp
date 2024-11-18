@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.gostudyapp"
-        minSdk = 24
+        minSdk = 34
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.googleid)
 
     // Testing
     testImplementation(libs.junit)
@@ -91,6 +93,15 @@ dependencies {
     // Firebase
     implementation(libs.firebase.auth)
     implementation(libs.play.services.auth)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.auth)
+    implementation(libs.firebase.firestore)
+
+    //Authentication with Credential Manager
+    implementation(libs.play.services.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     // Dependency injection
     implementation("com.google.dagger:hilt-android:2.51.1")
