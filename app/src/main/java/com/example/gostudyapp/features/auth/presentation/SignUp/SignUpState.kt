@@ -1,4 +1,8 @@
 package com.example.gostudyapp.features.auth.presentation.SignUp
 
-class SignUpState {
-}
+data class SignUpState(
+    var currentEmail: String = "",
+    var currentPassword: String = "",
+    var currentConfirmPassword: String = "",
+    var currentGroupNumber: String = "",
+)

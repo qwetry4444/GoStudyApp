@@ -2,9 +2,9 @@ package com.example.gostudyapp.features.auth.presentation.components
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,11 +37,10 @@ fun GoogleAuthButton(onRequestResult: (Credential) -> Unit) {
 
     Button(
         onClick = { coroutineScope.launch { launchCredManButtonUI(context, onRequestResult) } },
-        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-        containerColor = Color.Transparent),
+        border = BorderStroke(1.dp, Color.Gray),
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp, 0.dp)
+            .padding(12.dp, 0.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.gmail_logo),
@@ -49,7 +48,7 @@ fun GoogleAuthButton(onRequestResult: (Credential) -> Unit) {
             modifier = Modifier.size(15.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
-        Text(text = stringResource(id = R.string.buttonTextSurGUMail))
+        Text(text = stringResource(id = R.string.buttonTextSurGUMail), color = Color.Gray)
     }
 }
 

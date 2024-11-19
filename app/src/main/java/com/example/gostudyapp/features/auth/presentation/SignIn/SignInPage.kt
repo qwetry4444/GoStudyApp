@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -23,18 +24,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.core.presentation.navigation.Route
+import com.example.gostudyapp.core.presentation.navigation.SignUp
 import com.example.gostudyapp.features.auth.presentation.components.GoogleAuthButton
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
@@ -70,9 +68,9 @@ fun LogInPage(
             TextField(
                 value = logInState.value.currentEmail,
                 onValueChange = { signInViewModel.onEmailInputChanged(it) },
+                
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp)),
-
                 placeholder = { Text(text = stringResource(id = R.string.placeholderLogin)) }
             )
 
@@ -81,6 +79,7 @@ fun LogInPage(
             TextField(
                 value = logInState.value.currentPassword,
                 onValueChange = { signInViewModel.onPasswordInputChanged(it) },
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.clip(RoundedCornerShape(12.dp)),
                 placeholder = { Text(text = stringResource(id = R.string.placeholderPassword))}
             )
@@ -113,38 +112,24 @@ fun LogInPage(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            val uriHandler = LocalUriHandler.current
-            Text(buildAnnotatedString {
-                append(stringResource(id = R.string.alreadyHaveAnAccount))
-                val link =
-                    LinkAnnotation.Url(
-                        "https://developer.android.com/jetpack/compose",
-                        TextLinkStyles(SpanStyle(color = Color.Blue))
-                    ) {
-                        val url = (it as LinkAnnotation.Url).url
-                        // log some metrics
-                        uriHandler.openUri(url)
-                    }
-                withLink(link) { append(stringResource(id = R.string.SignIn)) }
-            })
-            Text(text = "sdf", modifier = Modifier.clickable { })
-
-            Spacer(modifier = Modifier.height(32.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(text = stringResource(id = R.string.stillDontHaveAnAccount), modifier = Modifier)
+                Text(text = stringResource(id = R.string.SignUp),
+                    color = Color.Blue,
+                    textDecoration = TextDecoration.Underline,
+                    modifier = Modifier
+                    .clickable(onClick = {navigateOnSignUp(SignUp)})
+                )
+            }
+            Spacer(modifier = Modifier.height(64.dp))
 
             Text(text = stringResource(id = R.string.textViewAuthWith))
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Box(modifier = Modifier
-                .size(width = 300.dp, height = 42.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color.LightGray)
-            ) {
-                GoogleAuthButton{ credential ->
-                    signInViewModel.onSignInWithGoogle(credential, navigateOnSignIn)
-                }
+            GoogleAuthButton{ credential ->
+                signInViewModel.onSignInWithGoogle(credential, navigateOnSignIn)
             }
-
         }
     }
 }

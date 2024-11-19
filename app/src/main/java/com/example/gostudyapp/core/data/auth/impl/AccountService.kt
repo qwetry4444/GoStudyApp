@@ -21,7 +21,7 @@ class AccountService @Inject constructor() : IAccountService
         get() = callbackFlow {
             val listener =
                 FirebaseAuth.AuthStateListener { auth ->
-                    this.trySend(auth.currentUser.toNotesUser())
+                    this.trySend(auth.currentUser.toUser())
                 }
             Firebase.auth.addAuthStateListener(listener)
             awaitClose { Firebase.auth.removeAuthStateListener(listener) }
@@ -35,7 +35,7 @@ class AccountService @Inject constructor() : IAccountService
     }
 
     override fun getUserProfile(): User {
-        return Firebase.auth.currentUser.toNotesUser()
+        return Firebase.auth.currentUser.toUser()
     }
 
     override suspend fun createAnonymousAccount() {
@@ -80,7 +80,7 @@ class AccountService @Inject constructor() : IAccountService
         Firebase.auth.currentUser!!.delete().await()
     }
 
-    private fun FirebaseUser?.toNotesUser(): User {
+    private fun FirebaseUser?.toUser(): User {
         return if (this == null) User() else User(
             id = this.uid,
             email = this.email ?: "",

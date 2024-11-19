@@ -14,12 +14,12 @@
     <string name="contentDescriptionLogo">\"Logo\"</string>
     <string name="placeholderLogin">Логин</string>
     <string name="placeholderPassword">Пароль</string>
+    <string name="placeholderConfirmPassword">Повторите пароль</string>
     <string name="buttonTextLogIn">Войти</string>
     <string name="textViewAuthWith">Авторизация с помощью:</string>
     <string name="buttonTextSurGUMail">Университетская почта СурГУ</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="contentDescriptionGmailLogo">GmailLogo</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="errorEmailOrPasswordWrong">Почта или пароль неверны</string>
     <string name="homePageTitle">GoStudy СурГУ</string>
@@ -41,5 +41,10 @@
     <string name="pair5_class">У708</string>
     <string name="pair6_title">"Теория вероятностей, лекция"</string>
     <string name="pair6_class">А504</string>
-    <string name="notesDescriptionProfile">Нопонимания иконка</string>
+    <string name="stillDontHaveAnAccount">Еще нет аккаунта?</string>
+    <string name="SignUp">Зарегестрироваться</string>
+    <string name="alreadyHaveAnAccount">Уже есть аккаунт?</string>
+    <string name="SignIn">Войти</string>
+    <string name="notesDescriptionProfile">Напоминания иконка</string>
+    <string name="groupNumber">Номер группы</string>
 </resources>
