@@ -12,3 +12,6 @@ val Pink40 = Color(0xFF7D5260)
 
 val ButtonGradientLeft = Color(0xCC8348FF)
 val ButtonGradientRight = Color(0xFF5200FF)
+
+val TodayClassGradientLeft = Color(0xFF673AB7)
+val TodayClassGradientRight = Color(0xFF512DA8)

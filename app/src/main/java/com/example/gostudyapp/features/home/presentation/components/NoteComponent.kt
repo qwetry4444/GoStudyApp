@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import com.google.type.DateTime
 
 @Composable
-fun Note(title: String, date: DateTime? = null){
+fun NoteComponent(title: String, date: DateTime? = null){
     Row {
         if (date != null){
             Text(text = "${date.day}.${date.month} - ")

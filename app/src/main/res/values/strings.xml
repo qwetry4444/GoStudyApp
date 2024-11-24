@@ -1,7 +1,6 @@
 <resources>
     <string name="default_web_client_id">575707751862-4njvqr1fgun06au401b64fek6cmf7pk5.apps.googleusercontent.com</string>
     <string name="app_name">GoStudyApp</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -47,4 +46,6 @@
     <string name="SignIn">Войти</string>
     <string name="notesDescriptionProfile">Напоминания иконка</string>
     <string name="groupNumber">Номер группы</string>
+    <string name="pair">пара</string>
+    <string name="todayClassNumber"><b>%1$s</b> - %2$d пара</string>
 </resources>
