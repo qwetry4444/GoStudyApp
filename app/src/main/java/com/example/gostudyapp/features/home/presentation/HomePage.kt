@@ -2,6 +2,7 @@ package com.example.gostudyapp.features.home.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -25,17 +27,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.core.data.model.Lesson
 import com.example.gostudyapp.features.home.presentation.components.ClassTodayComponent
 import com.example.gostudyapp.features.home.presentation.components.NoteComponent
+import com.example.gostudyapp.features.home.presentation.components.WeekdayButton
 import com.example.gostudyapp.features.home.presentation.components.util.TodayClassSequence
+import com.example.gostudyapp.features.home.presentation.components.util.Weekday
 import com.google.type.DateTime
+import java.time.LocalDate
 
 @Composable
 fun HomePage(
+    homeViewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ){
+    val homeState = homeViewModel.uiState.collectAsState()
+
     Box() {
         Column() {
             Box(contentAlignment = Alignment.BottomStart,
@@ -112,11 +121,56 @@ fun HomePage(
                     Column {
                         ClassTodayComponent(lesson = Lesson(1, "3", number = 2, room = "У903"), classSequence = TodayClassSequence.Now)
                         Spacer(modifier = Modifier.height(16.dp))
-                        ClassTodayComponent(lesson = Lesson(2, "Матанализ ", number = 3, room = "А234"), classSequence = TodayClassSequence.Next)
+                        ClassTodayComponent(lesson = Lesson(2, "МатанализМатанализМатанализМатанализМатанализМатанализМатанализ ", number = 3, room = "А234"), classSequence = TodayClassSequence.Next)
                    }
                     Spacer(modifier = Modifier.height(24.dp))
                 }
             }
+            Box(){
+                Column {
+                    Text(text = "Расписание")
+                    Row {
+                        WeekdayButton(
+                            weekday = Weekday.Monday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Monday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Monday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Monday) }
+                        )
+                        WeekdayButton(
+                            weekday = Weekday.Tuesday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Tuesday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Tuesday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Tuesday) }
+                        )
+                        WeekdayButton(
+                            weekday = Weekday.Wednesday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Wednesday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Wednesday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Wednesday) }
+                        )
+                        WeekdayButton(
+                            weekday = Weekday.Thursday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Thursday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Thursday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Thursday) }
+                        )
+                        WeekdayButton(
+                            weekday = Weekday.Friday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Friday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Friday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Friday) }
+                        )
+                        WeekdayButton(
+                            weekday = Weekday.Saturday,
+                            date = homeViewModel.weekdays.getOrDefault(Weekday.Saturday, LocalDate.now()),
+                            isActive = homeState.value.selectedWeekday == Weekday.Saturday,
+                            modifier = Modifier.clickable { homeViewModel.onWeekdayClicked(Weekday.Saturday) }
+                        )
+                    }
+                }
+            }
+
+
         }
     }
 }
