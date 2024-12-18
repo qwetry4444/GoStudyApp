@@ -1,7 +1,7 @@
 package com.example.gostudyapp.core.data.auth.impl
 
 import com.example.gostudyapp.core.data.auth.IAccountService
-import com.example.gostudyapp.core.data.model.User
+import com.example.gostudyapp.core.domain.model.User
 import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth

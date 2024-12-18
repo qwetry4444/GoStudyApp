@@ -57,7 +57,7 @@ class SignUpViewModel @Inject constructor(
                 }
 
                 if (!uiState.value.currentGroupNumber.isValidGroupNumber()) {
-                    throw IllegalArgumentException("Group number do not match")
+                    throw IllegalArgumentException("GroupDto number do not match")
                 }
 
                 accountService.linkAccountWithEmail(uiState.value.currentEmail, uiState.value.currentPassword)

@@ -1,4 +1,4 @@
-package com.example.gostudyapp.core.data.model
+package com.example.gostudyapp.core.domain.model
 
 data class User(
     val id: String = "",

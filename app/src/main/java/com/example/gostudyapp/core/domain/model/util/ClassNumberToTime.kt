@@ -1,4 +1,4 @@
-package com.example.gostudyapp.core.data.model.util
+package com.example.gostudyapp.core.domain.model.util
 
 fun ClassNumberToTime(number: Int) : String{
     return when(number){

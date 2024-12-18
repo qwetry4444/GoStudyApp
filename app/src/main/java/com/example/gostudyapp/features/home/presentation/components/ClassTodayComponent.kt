@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gostudyapp.R
-import com.example.gostudyapp.core.data.model.Lesson
-import com.example.gostudyapp.core.data.model.util.ClassNumberToTime
+import com.example.gostudyapp.core.domain.model.Schedule.Lesson
+import com.example.gostudyapp.core.domain.model.util.ClassNumberToTime
 import com.example.gostudyapp.features.home.presentation.components.util.TodayClassSequence
 import com.example.gostudyapp.ui.theme.TodayClassGradientLeft
 

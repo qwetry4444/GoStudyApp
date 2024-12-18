@@ -1,4 +1,4 @@
-package com.example.gostudyapp.core.data.model
+package com.example.gostudyapp.core.domain.model.Schedule
 
 data class Lesson(
     val id: Int,

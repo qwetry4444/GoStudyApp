@@ -5,12 +5,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-
 }
 
 android {
     namespace = "com.example.gostudyapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.gostudyapp"
@@ -74,6 +73,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.googleid)
 
+
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -96,6 +101,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.google.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database.ktx)
 
     //Authentication with Credential Manager
     implementation(libs.play.services.auth)

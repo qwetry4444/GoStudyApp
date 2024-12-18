@@ -4,6 +4,7 @@ androidxLifecycleRuntimeKtx = "2.3.1"
 credentials = "1.2.2"
 firebaseAuthKtx = "23.1.0"
 firebaseBom = "33.6.0"
+firebaseDatabaseKtx = "21.0.0"
 hiltAndroid = "2.51.1"
 hiltCompiler = "2.37"
 hiltNavigationCompose = "1.2.0"
@@ -26,10 +27,15 @@ composeNavigation = "2.8.3"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 playServicesAuthVersion = "20.4.1"
+roomCompilerVersion = "2.6.1"
+roomKtxVersion = "2.5.2"
+roomRuntime = "2.6.1"
 serialization = "1.6.3"
 navigationRuntimeKtx = "2.8.3"
 playServicesAuth = "21.2.0"
 googleid = "1.1.1"
+roomCommon = "2.6.1"
+roomKtx = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,8 +43,13 @@ androidx-credentials = { module = "androidx.credentials:credentials", version.re
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 androidx-lifecycle-runtime-ktx-v231 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycleRuntimeKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtxVersion" }
+androidx-room-ktx-v252 = { module = "androidx.room:room-ktx", version.ref = "roomKtxVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomKtxVersion" }
+androidx-room-runtime-v261 = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 google-firebase-auth = { module = "com.google.firebase:firebase-auth" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
@@ -70,6 +81,9 @@ androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navig
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 play-services-auth-v2041 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
 googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+room-compiler-v261 = { module = "androidx.room:room-compiler", version.ref = "roomCompilerVersion" }
 
 
 [plugins]

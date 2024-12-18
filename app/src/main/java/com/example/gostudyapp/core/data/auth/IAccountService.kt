@@ -1,6 +1,6 @@
 package com.example.gostudyapp.core.data.auth
 
-import com.example.gostudyapp.core.data.model.User
+import com.example.gostudyapp.core.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface IAccountService {

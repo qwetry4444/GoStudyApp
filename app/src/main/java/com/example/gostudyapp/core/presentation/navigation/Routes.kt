@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 //    @Serializable
 //    object Home
 //    @Serializable
-//    data class Schedule(
+//    data class ScheduleDto(
 //        val studyGroup: String
 //    )
 //}
@@ -46,7 +46,7 @@ data class Schedule (
 //
 //    object Home : Screen("home")
 //
-//    object Schedule : Screen("schedule/{$ARG_STUDY_GROUP_URI}") {
+//    object ScheduleDto : Screen("schedule/{$ARG_STUDY_GROUP_URI}") {
 //        fun createRoute(scheduleUri: String) = "schedule/$scheduleUri"
 //    }
 //

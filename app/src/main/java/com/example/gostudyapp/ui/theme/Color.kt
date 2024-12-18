@@ -15,3 +15,6 @@ val ButtonGradientRight = Color(0xFF5200FF)
 
 val TodayClassGradientLeft = Color(0xFF673AB7)
 val TodayClassGradientRight = Color(0xFF512DA8)
+
+val WeekdayButtonGradientStart = Color(0xFF4E4AFF)
+val WeekdayButtonGradientEnd = Color(0xCC8348FF)
