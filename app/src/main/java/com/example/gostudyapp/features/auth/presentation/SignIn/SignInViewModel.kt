@@ -6,9 +6,7 @@ import com.example.gostudyapp.core.data.auth.impl.AccountService
 import com.example.gostudyapp.core.presentation.BaseViewModel
 import com.example.gostudyapp.core.presentation.ERROR_TAG
 import com.example.gostudyapp.core.presentation.UNEXPECTED_CREDENTIAL
-import com.example.gostudyapp.core.presentation.navigation.Home
 import com.example.gostudyapp.core.presentation.navigation.Route
-import com.example.gostudyapp.core.presentation.navigation.SignIn
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.Companion.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,7 +36,7 @@ class SignInViewModel @Inject constructor(
     fun onSignInClick(navigateOnSuccess: (Route, Route) -> Unit) {
         launchCatching {
             accountService.signInWithEmail(uiState.value.currentEmail, uiState.value.currentPassword)
-            navigateOnSuccess(Home, SignIn)
+            navigateOnSuccess(Route.Home, Route.SignIn)
         }
 
     }
@@ -49,7 +47,7 @@ class SignInViewModel @Inject constructor(
             if (credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) { //credential is CustomCredential ||
                 val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
                 accountService.signInWithGoogle(googleIdTokenCredential.idToken)
-                navigateOnSuccess(Home, SignIn)
+                navigateOnSuccess(Route.Home, Route.SignIn)
 
             } else {
                 Log.e(ERROR_TAG, UNEXPECTED_CREDENTIAL)

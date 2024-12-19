@@ -5,6 +5,7 @@ import com.example.gostudyapp.core.data.database.repositories.RoomRepositoryImpl
 import com.example.gostudyapp.core.data.database.repositories.ScheduleRepositoryImpl
 import com.example.gostudyapp.core.data.database.repositories.ScheduleSubgroupRepositoryImpl
 import com.example.gostudyapp.core.data.database.repositories.ScheduleTeacherRepositoryImpl
+import com.example.gostudyapp.core.data.database.repositories.SubgroupRepositoryImpl
 import com.example.gostudyapp.core.data.database.repositories.SubjectRepositoryImpl
 import com.example.gostudyapp.core.data.database.repositories.TeacherRepositoryImpl
 import com.example.gostudyapp.core.domain.IRepository.GroupRepository
@@ -12,6 +13,7 @@ import com.example.gostudyapp.core.domain.IRepository.RoomRepository
 import com.example.gostudyapp.core.domain.IRepository.ScheduleRepository
 import com.example.gostudyapp.core.domain.IRepository.ScheduleSubgroupRepository
 import com.example.gostudyapp.core.domain.IRepository.ScheduleTeacherRepository
+import com.example.gostudyapp.core.domain.IRepository.SubgroupRepository
 import com.example.gostudyapp.core.domain.IRepository.SubjectRepository
 import com.example.gostudyapp.core.domain.IRepository.TeacherRepository
 import com.example.gostudyapp.core.domain.usecases.GroupUseCase.AddGroupUseCase
@@ -24,6 +26,10 @@ import com.example.gostudyapp.core.domain.usecases.ScheduleSubgroupUseCase.AddSc
 import com.example.gostudyapp.core.domain.usecases.ScheduleTeacherUseCase.AddScheduleTeacherUseCase
 import com.example.gostudyapp.core.domain.usecases.ScheduleUseCase.AddScheduleUseCase
 import com.example.gostudyapp.core.domain.usecases.ScheduleUseCase.GetScheduleByIdUseCase
+import com.example.gostudyapp.core.domain.usecases.ScheduleUseCase.GetScheduleForSubgroupUseCase
+import com.example.gostudyapp.core.domain.usecases.ScheduleUseCase.GetScheduleWithDetailsUseCase
+import com.example.gostudyapp.core.domain.usecases.SubgroupUseCase.AddSubgroupUseCase
+import com.example.gostudyapp.core.domain.usecases.SubgroupUseCase.GetSubgroupByIdUseCase
 import com.example.gostudyapp.core.domain.usecases.SubjectUseCase.AddSubjectUseCase
 import com.example.gostudyapp.core.domain.usecases.SubjectUseCase.GetSubjectByIdUseCase
 import com.example.gostudyapp.core.domain.usecases.TeacherUseCase.AddTeacherUseCase
@@ -52,6 +58,10 @@ object CloudFirestoreModule {
     @Singleton
     fun provideGroupRepository(firestore: FirebaseFirestore): GroupRepository =
         GroupRepositoryImpl(firestore)
+    @Provides
+    @Singleton
+    fun provideSubgroupRepository(firestore: FirebaseFirestore): SubgroupRepository =
+        SubgroupRepositoryImpl(firestore)
     @Provides
     @Singleton
     fun provideTeacherRepository(firestore: FirebaseFirestore): TeacherRepository =
@@ -95,6 +105,13 @@ object CloudFirestoreModule {
 
     @Provides
     @Singleton
+    fun provideAddSubgroupUseCase(repository: SubgroupRepository) = AddSubgroupUseCase(repository)
+    @Provides
+    @Singleton
+    fun provideGetSubgroupByIdUseCase(repository: SubgroupRepository) = GetSubgroupByIdUseCase(repository)
+
+    @Provides
+    @Singleton
     fun provideAddTeacherUseCase(repository: TeacherRepository) = AddTeacherUseCase(repository)
     @Provides
     @Singleton
@@ -116,6 +133,12 @@ object CloudFirestoreModule {
     @Provides
     @Singleton
     fun provideGetScheduleByIdUseCase(repository: ScheduleRepository) = GetScheduleByIdUseCase(repository)
+    @Provides
+    @Singleton
+    fun provideGetScheduleForSubgroupUseCase(repository: ScheduleRepository) = GetScheduleForSubgroupUseCase(repository)
+    @Provides
+    @Singleton
+    fun provideGetScheduleWithDetailsUseCase(repository: ScheduleRepository) = GetScheduleWithDetailsUseCase(repository)
 
     @Provides
     @Singleton

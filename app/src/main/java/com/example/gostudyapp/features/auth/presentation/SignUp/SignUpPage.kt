@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.core.presentation.navigation.Route
-import com.example.gostudyapp.core.presentation.navigation.SignIn
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
 
@@ -136,7 +135,7 @@ fun SignUpPage(
                     color = Color.Blue,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
-                        .clickable(onClick = {navigateOnSignIn(SignIn)})
+                        .clickable(onClick = {navigateOnSignIn(Route.SignIn)})
                 )
             }
         }

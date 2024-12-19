@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.core.presentation.navigation.Route
-import com.example.gostudyapp.core.presentation.navigation.SignUp
 import com.example.gostudyapp.features.auth.presentation.components.GoogleAuthButton
 import com.example.gostudyapp.ui.theme.ButtonGradientLeft
 import com.example.gostudyapp.ui.theme.ButtonGradientRight
@@ -118,7 +117,7 @@ fun LogInPage(
                     color = Color.Blue,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
-                    .clickable(onClick = {navigateOnSignUp(SignUp)})
+                    .clickable(onClick = {navigateOnSignUp(Route.SignUp)})
                 )
             }
             Spacer(modifier = Modifier.height(64.dp))

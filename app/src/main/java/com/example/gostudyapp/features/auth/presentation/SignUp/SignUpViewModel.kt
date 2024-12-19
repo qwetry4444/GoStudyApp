@@ -2,9 +2,7 @@ package com.example.gostudyapp.features.auth.presentation.SignUp
 
 import com.example.gostudyapp.core.data.auth.impl.AccountService
 import com.example.gostudyapp.core.presentation.BaseViewModel
-import com.example.gostudyapp.core.presentation.navigation.Home
 import com.example.gostudyapp.core.presentation.navigation.Route
-import com.example.gostudyapp.core.presentation.navigation.SignUp
 import com.example.gostudyapp.features.auth.domain.isValidEmail
 import com.example.gostudyapp.features.auth.domain.isValidGroupNumber
 import com.example.gostudyapp.features.auth.domain.isValidPassword
@@ -60,10 +58,10 @@ class SignUpViewModel @Inject constructor(
                     throw IllegalArgumentException("GroupDto number do not match")
                 }
 
-                accountService.linkAccountWithEmail(uiState.value.currentEmail, uiState.value.currentPassword)
-                navigateOnSuccess(Home, SignUp)
+                accountService.createAccount(uiState.value.currentEmail, uiState.value.currentPassword, uiState.value.currentGroupNumber)
+
+                navigateOnSuccess(Route.Home, Route.SignUp)
             }
         }
-
     }
 }

@@ -44,8 +44,19 @@ class ScheduleSubgroupRepositoryImpl @Inject constructor(private val firestore: 
             firestore.collection("schedule_subgroups")
                 .add(scheduleSubgroup.toDto())
                 .await()
+        } catch (_: Exception) { }
+    }
+
+    override suspend fun getScheduleIdsForSubgroup(subgroupId: String) : List<String> {
+        return try {
+            firestore.collection("schedule_subgroups")
+                .whereEqualTo("subgroupID", subgroupId)
+                .get()
+                .await()
+                .documents
+                .mapNotNull { it.getString("scheduleID") }
         } catch (e: Exception) {
-            // Handle exception if needed
+            emptyList()
         }
     }
 }

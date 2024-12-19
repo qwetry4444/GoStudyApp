@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,11 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gostudyapp.R
 import com.example.gostudyapp.core.domain.model.Schedule.Lesson
-import com.example.gostudyapp.core.domain.model.Schedule.ScheduleWithDetails
-import com.example.gostudyapp.core.presentation.components.HeaderComponent
 import com.example.gostudyapp.features.home.presentation.components.ClassTodayComponent
 import com.example.gostudyapp.features.home.presentation.components.NoteComponent
-import com.example.gostudyapp.features.home.presentation.components.ScheduleItemComponent
 import com.example.gostudyapp.features.home.presentation.components.WeekdayButton
 import com.example.gostudyapp.features.home.presentation.components.util.TodayClassSequence
 import com.example.gostudyapp.features.home.presentation.components.util.Weekday
@@ -44,12 +42,12 @@ fun HomePage(
     val homeState = homeViewModel.uiState.collectAsState()
     val scrollState = rememberScrollState()
 
-    Box {
+    Box(modifier = Modifier.fillMaxHeight()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.verticalScroll(scrollState)) {
 
-            HeaderComponent()
+            //HeaderComponent()
 
             Box(modifier = Modifier.padding(20.dp)) {
                 Column(
@@ -191,22 +189,22 @@ fun HomePage(
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            val scheduleWithDetails = ScheduleWithDetails(
-                "Monday",
-                1,
-                "МатематикаМатематикаМатематика",
-                listOf("Иван Иванович"),
-                listOf("609-22"),
-                "У901",
-                false,
-                true,
-                listOf("609-22a", "609-22б")
-            )
+//            val scheduleWithDetails = ScheduleWithDetails(
+//                "Monday",
+//                1,
+//                "МатематикаМатематикаМатематика",
+//                listOf("Иван Иванович"),
+//                listOf("609-22"),
+//                "У901",
+//                false,
+//                true,
+//                listOf("609-22a", "609-22б")
+//            )
             Box {
                 Column {
-                    ScheduleItemComponent(scheduleWithDetails)
-                    ScheduleItemComponent(scheduleWithDetails)
-                    ScheduleItemComponent(scheduleWithDetails)
+//                    ScheduleItemComponent(scheduleWithDetails)
+//                    ScheduleItemComponent(scheduleWithDetails)
+//                    ScheduleItemComponent(scheduleWithDetails)
                 }
             }
 

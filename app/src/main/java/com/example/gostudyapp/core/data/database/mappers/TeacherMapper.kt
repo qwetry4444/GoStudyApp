@@ -7,7 +7,10 @@ fun TeacherDto.toDomain(): Teacher {
     return Teacher(
         firstName = firstName,
         lastName = lastName,
-        department = department
+        patronymic = patronymic,
+        department = department,
+        position = position,
+        academicDegree = academicDegree
     )
 }
 
@@ -15,6 +18,9 @@ fun Teacher.toDto(): TeacherDto {
     return TeacherDto(
         firstName = firstName,
         lastName = lastName,
-        department = department
+        patronymic = patronymic,
+        department = department,
+        position = position,
+        academicDegree = academicDegree
     )
 }

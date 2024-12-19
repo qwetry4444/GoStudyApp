@@ -6,4 +6,5 @@ interface ScheduleSubgroupRepository {
     suspend fun getScheduleSubgroupById(scheduleSubgroupId: String): ScheduleSubgroup?
     suspend fun getAllScheduleSubgroups(): List<ScheduleSubgroup>
     suspend fun addScheduleSubgroup(scheduleSubgroup: ScheduleSubgroup)
+    suspend fun getScheduleIdsForSubgroup(subgroupId: String) : List<String>
 }
