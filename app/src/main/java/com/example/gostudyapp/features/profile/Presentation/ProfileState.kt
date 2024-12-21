@@ -5,6 +5,10 @@ data class ProfileState(
     var subgroup: String = "",
     var userLogin: String = "",
     var userGroupNumber: String = "",
-    var userSubgroup: String = ""
-
+    var userSubgroup: String = "",
+    var currentInputGroupNumber: String = "",
+    var selectedSubgroupNumber: String? = null,
+    var isMenuExpanded: Boolean = false,
+    var isInputGroupNumberWrong: Boolean = false,
+    var errorMessage: String? = null
 )

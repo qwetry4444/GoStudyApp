@@ -48,4 +48,5 @@
     <string name="groupNumber">Номер группы</string>
     <string name="pair">пара</string>
     <string name="todayClassNumber"><b>%1$s</b> - %2$d пара</string>
+    <string name="wrongGroupNumberErrorMessage">Такой группы нет.\nФормат: 609-22</string>
 </resources>

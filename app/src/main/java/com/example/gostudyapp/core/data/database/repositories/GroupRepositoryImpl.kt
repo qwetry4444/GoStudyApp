@@ -35,4 +35,18 @@ class GroupRepositoryImpl @Inject constructor (private val firestore: FirebaseFi
             .add(group.toDto())
             .await()
     }
+
+    override suspend fun getGroupIdByNumber(groupNumber: String): String {
+        return try {
+            val querySnapshot = firestore.collection("groups")
+                .whereEqualTo("groupNumber", groupNumber)
+                .get()
+                .await()
+
+            val document = querySnapshot.documents.firstOrNull()
+            document?.id ?: throw Exception("Group with number $groupNumber not found")
+        } catch (e: Exception) {
+            throw Exception("Error fetching group ID: ${e.message}")
+        }
+    }
 }

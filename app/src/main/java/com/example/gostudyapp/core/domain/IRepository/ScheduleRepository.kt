@@ -11,4 +11,5 @@ interface ScheduleRepository {
 
     suspend fun getScheduleForSubgroup(subgroupID: String): List<ScheduleDto>
     suspend fun getScheduleWithDetails(scheduleID: String): ScheduleWithDetails
+    suspend fun getScheduleWithDetailsForSubgroup(subgroupID: String): List<ScheduleWithDetails>
 }

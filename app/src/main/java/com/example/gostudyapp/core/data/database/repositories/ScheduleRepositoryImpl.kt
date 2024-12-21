@@ -10,6 +10,8 @@ import com.example.gostudyapp.core.domain.model.Schedule.ScheduleWithDetails
 import com.example.gostudyapp.core.domain.model.Schedule.Subject
 import com.example.gostudyapp.core.domain.model.Schedule.Teacher
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -48,9 +50,7 @@ class ScheduleRepositoryImpl @Inject constructor(private val firestore: Firebase
             firestore.collection("schedules")
                 .add(schedule.toDto())
                 .await()
-        } catch (e: Exception) {
-            // Handle exception if needed
-        }
+        } catch (e: Exception) { }
     }
 
 
@@ -58,16 +58,13 @@ class ScheduleRepositoryImpl @Inject constructor(private val firestore: Firebase
 
     override suspend fun getScheduleForSubgroup(subgroupID: String): List<ScheduleDto> {
         return try {
-            // Получаем расписания, связанные с подгруппой
             val querySnapshot = scheduleSubgroupsCollection
                 .whereEqualTo("subgroupID", subgroupID)
                 .get()
                 .await()
 
-            // Извлекаем связанные расписания
             val scheduleIds = querySnapshot.documents.map { it.getString("scheduleID") }
 
-            // Получаем сами расписания по идентификаторам
             val schedules = scheduleIds.mapNotNull { scheduleId ->
                 schedulesCollection.document(scheduleId ?: "").get().await().toObject(ScheduleDto::class.java)
             }
@@ -83,56 +80,55 @@ class ScheduleRepositoryImpl @Inject constructor(private val firestore: Firebase
     private val teachersCollection = firestore.collection("teachers")
     private val subgroupsCollection = firestore.collection("subgroups")
     private val roomsCollection = firestore.collection("rooms")
-    private val groupsCollection = firestore.collection("groups")
 
-    override suspend fun getScheduleWithDetails(scheduleID: String): ScheduleWithDetails {
-        return try {
-            // 1. Получаем основное расписание
-            val scheduleDoc = schedulesCollection.document(scheduleID).get().await()
-            val schedule = scheduleDoc.toObject(ScheduleDto::class.java)
+    override suspend fun getScheduleWithDetails(scheduleID: String): ScheduleWithDetails = coroutineScope {
+        try {
+            val scheduleDocDeferred = async {
+                schedulesCollection.document(scheduleID).get().await()
+            }
+
+            val schedule = scheduleDocDeferred.await().toObject(ScheduleDto::class.java)
                 ?: throw Exception("Schedule not found")
 
-            // 2. Получаем предмет
-            val subjectDoc = subjectsCollection.document(schedule.subjectID).get().await()
-            val subject = subjectDoc.toObject(Subject::class.java)
-                ?: throw Exception("Subject not found")
-
-            // 3. Получаем преподавателей
-            val teacherDocs = firestore.collection("schedule_teachers")
-                .whereEqualTo("scheduleID", scheduleID).get().await()
-
-            val teachers = teacherDocs.documents.mapNotNull { teacherDoc ->
-                val teacherID = teacherDoc.getString("teacherID")
-                teacherID?.let {
-                    teachersCollection.document(it).get().await().toObject(Teacher::class.java)
-                }
+            val subjectDeferred = async {
+                subjectsCollection.document(schedule.subjectID).get().await()
+                    .toObject(Subject::class.java) ?: throw Exception("Subject not found")
             }
 
-            // 4. Получаем подгруппы
-            val subgroupDocs = firestore.collection("schedule_subgroups")
-                .whereEqualTo("scheduleID", scheduleID).get().await()
-
-            val subgroups = subgroupDocs.documents.mapNotNull {
-                it.getString("subgroupID")
+            val teachersDeferred = async {
+                firestore.collection("schedule_teachers")
+                    .whereEqualTo("scheduleID", scheduleID).get().await()
+                    .documents.mapNotNull { teacherDoc ->
+                        teacherDoc.getString("teacherID")?.let { teacherID ->
+                            teachersCollection.document(teacherID).get().await()
+                                .toObject(Teacher::class.java)
+                        }
+                    }
             }
 
-            // 5. Получаем группы, связанные с подгруппами
-            val groups = subgroups.flatMap { subgroupID ->
-                val subgroupDoc = subgroupsCollection.document(subgroupID).get().await()
-                val groupID = subgroupDoc.getString("groupID")
-                groupID?.let { listOf(it) } ?: emptyList()
+            val subgroupsDeferred = async {
+                firestore.collection("schedule_subgroups")
+                    .whereEqualTo("scheduleID", scheduleID).get().await()
+                    .documents.mapNotNull { it.getString("subgroupID") }
             }
 
-            // 6. Получаем аудиторию
-            val roomDoc = roomsCollection.document(schedule.roomID).get().await()
-            val room = roomDoc.toObject(Room::class.java)
-                ?: throw Exception("Room not found")
+            val roomDeferred = async {
+                roomsCollection.document(schedule.roomID).get().await()
+                    .toObject(Room::class.java) ?: throw Exception("Room not found")
+            }
 
-            // 7. Определяем тип недели (четная или нечетная)
+            val subject = subjectDeferred.await()
+            val teachers = teachersDeferred.await()
+            val subgroups = subgroupsDeferred.await()
+            val room = roomDeferred.await()
+
+            val groups = subgroups.mapNotNull { subgroupID ->
+                subgroupsCollection.document(subgroupID).get().await().getString("groupID")
+            }
+
             val isEvenWeek = schedule.weekType == "Even"
             val isOddWeek = schedule.weekType == "Odd"
 
-            // 8. Создаем объект ScheduleWithDetails
             ScheduleWithDetails(
                 weekday = schedule.weekday.toString(),
                 number = schedule.number,
@@ -146,6 +142,21 @@ class ScheduleRepositoryImpl @Inject constructor(private val firestore: Firebase
             )
         } catch (e: Exception) {
             throw Exception("Failed to fetch schedule details: ${e.message}")
+        }
+    }
+
+    override suspend fun getScheduleWithDetailsForSubgroup(subgroupID: String): List<ScheduleWithDetails> {
+        return try {
+            val scheduleDocs = firestore.collection("schedule_subgroups")
+                .whereEqualTo("subgroupID", subgroupID).get().await()
+
+            val scheduleIDs = scheduleDocs.documents.mapNotNull { it.getString("scheduleID") }
+
+            scheduleIDs.map { scheduleID ->
+                getScheduleWithDetails(scheduleID)
+            }
+        } catch (e: Exception) {
+            throw Exception("Failed to fetch schedules for subgroup: ${e.message}")
         }
     }
 }

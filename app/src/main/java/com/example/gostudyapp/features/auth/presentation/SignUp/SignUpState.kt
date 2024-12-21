@@ -5,4 +5,6 @@ data class SignUpState(
     var currentPassword: String = "",
     var currentConfirmPassword: String = "",
     var currentGroupNumber: String = "",
+    var selectedSubgroupNumber: String? = null,
+    var isMenuExpanded: Boolean = false,
 )

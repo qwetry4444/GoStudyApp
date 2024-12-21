@@ -1,5 +1,6 @@
 package com.example.gostudyapp.core.data.auth.impl
 
+import com.example.gostudyapp.core.domain.usecases.SubgroupUseCase.GetSubgroupIdByGroupNumberAndSubgroupNameUseCase
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -95,27 +96,21 @@ import javax.inject.Inject
 //}
 
 
-class AccountService @Inject constructor() {
+class AccountService @Inject constructor(
+    private val getSubgroupIdByGroupNumberAndSubgroupNameUseCase: GetSubgroupIdByGroupNumberAndSubgroupNameUseCase
+) {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    /**
-     * Создать аккаунт с использованием email, пароля и номера группы.
-     *
-     * @param email Email пользователя.
-     * @param password Пароль пользователя.
-     * @param groupNumber Номер группы пользователя.
-     * @throws Exception Если создание аккаунта завершилось неудачей.
-     */
-    suspend fun createAccount(email: String, password: String, groupNumber: String) {
+
+    suspend fun createAccount(email: String, password: String, groupNumber: String, subgroupName: String = "а") {
         try {
             val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             val userId = authResult.user?.uid ?: throw Exception("Не удалось получить UID пользователя")
 
-            // Сохранение дополнительных данных в Firestore
             val userData = mapOf(
-                "email" to email,
-                "group_number" to groupNumber
+                "uid" to userId,
+                "subgroup_id" to getSubgroupIdByGroupNumberAndSubgroupNameUseCase.invoke(groupNumber, subgroupName)
             )
             firestore.collection("users").document(userId).set(userData).await()
         } catch (e: Exception) {
@@ -123,13 +118,6 @@ class AccountService @Inject constructor() {
         }
     }
 
-    /**
-     * Авторизоваться с использованием email и пароля.
-     *
-     * @param email Email пользователя.
-     * @param password Пароль пользователя.
-     * @throws Exception Если авторизация завершилась неудачей.
-     */
     suspend fun signInWithEmail(email: String, password: String) {
         try {
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
@@ -138,11 +126,6 @@ class AccountService @Inject constructor() {
         }
     }
 
-    /**
-     * Получить текущего авторизованного пользователя.
-     *
-     * @return [FirebaseUser] или null, если пользователь не авторизован.
-     */
     fun currentUser(): FirebaseUser? {
         return firebaseAuth.currentUser
     }
@@ -163,19 +146,10 @@ class AccountService @Inject constructor() {
         }
     }
 
-    /**
-     * Выйти из аккаунта текущего пользователя.
-     */
     fun signOut() {
         firebaseAuth.signOut()
     }
 
-    /**
-     * Сброс пароля по email.
-     *
-     * @param email Email пользователя.
-     * @throws Exception Если сброс пароля завершился неудачей.
-     */
     suspend fun resetPassword(email: String) {
         try {
             firebaseAuth.sendPasswordResetEmail(email).await()

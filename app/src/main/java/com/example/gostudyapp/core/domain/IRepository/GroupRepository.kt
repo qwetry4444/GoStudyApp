@@ -6,4 +6,5 @@ interface GroupRepository {
     suspend fun getGroupById(groupId: String) : Group?
     suspend fun getAllGroups() : List<Group>
     suspend fun addGroup(group: Group)
+    suspend fun getGroupIdByNumber(groupNumber: String): String
 }

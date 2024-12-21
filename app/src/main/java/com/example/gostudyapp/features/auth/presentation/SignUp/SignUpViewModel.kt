@@ -39,6 +39,14 @@ class SignUpViewModel @Inject constructor(
             currentState.copy(currentGroupNumber = value) }
     }
 
+    fun toggleMenu() {
+        _uiState.value = _uiState.value.copy(isMenuExpanded = !_uiState.value.isMenuExpanded)
+    }
+
+    fun onItemSelected(item: String) {
+        _uiState.value = _uiState.value.copy(selectedSubgroupNumber = item, isMenuExpanded = false)
+    }
+
     fun onSignUpClick(navigateOnSuccess: (Route, Route) -> Unit) {
         launchCatching {
             launchCatching {

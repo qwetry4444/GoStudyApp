@@ -4,14 +4,23 @@ import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.Locale
 
-enum class Weekday{
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday,
+enum class Weekday(val value : Int)
+{
+    Monday(1),
+    Tuesday(2),
+    Wednesday(3),
+    Thursday(4),
+    Friday(5),
+    Saturday(6),
+    Sunday(7);
+
+    companion object {
+        fun from(findValue: Int): Weekday = entries.first { it.value == findValue }
+    }
+
+    override fun toString(): String {
+        return super.toString()
+    }
 }
 
 fun WeekdayToString(weekday: Weekday): String {
@@ -26,8 +35,12 @@ fun WeekdayToString(weekday: Weekday): String {
     }
 }
 
+data class WeekdayWithDate(
+    val weekday: Weekday,
+    val date: LocalDate
+)
 
-fun getCurrentWeekDates(): Map<Weekday, LocalDate> {
+fun getCurrentWeekdaysWithDate(): List<WeekdayWithDate> {
     val currentDate = LocalDate.now()
 
     val weekFields = WeekFields.of(Locale.getDefault())
@@ -37,5 +50,16 @@ fun getCurrentWeekDates(): Map<Weekday, LocalDate> {
     val daysToSubtract = (currentDayOfWeek.value - firstDayOfWeek.value + 7) % 7
     val startOfWeek = currentDate.minusDays(daysToSubtract.toLong())
 
-    return Weekday.entries.associateWith { weekday -> startOfWeek.plusDays(weekday.ordinal.toLong()) }
+    return Weekday.entries
+        .filter { it != Weekday.Sunday }
+        .map { weekday ->
+            WeekdayWithDate(
+                weekday = weekday,
+                date = startOfWeek.plusDays(weekday.ordinal.toLong() + 1)
+            )
+        }
+}
+
+fun getCurrentWeekday(): Weekday {
+    return Weekday.from(LocalDate.now().dayOfWeek.value)
 }
