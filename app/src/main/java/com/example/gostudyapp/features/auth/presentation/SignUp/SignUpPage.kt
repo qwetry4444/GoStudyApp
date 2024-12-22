@@ -25,7 +25,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -96,8 +95,8 @@ fun SignUpPage(
                     placeholder = { Text(text = stringResource(id = R.string.groupNumber)) }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Box(modifier = Modifier.width(110.dp).padding(bottom = 6.dp)) {
-                    OutlinedTextField(
+                Box(modifier = Modifier.width(110.dp).padding(bottom = 7.dp)) {
+                    TextField(
                         value = signUpState.value.selectedSubgroupNumber ?: "а/б",
                         onValueChange = { },
                         readOnly = true,

@@ -91,14 +91,13 @@ class ProfileViewModel @Inject constructor(
                         } else {
                             "Не указано"
                         }
+                        updateUserGroupIDUseCase.invoke(uid, subgroupId)
                         _uiState.update { currentState ->
                             currentState.copy(groupNumber = groupNumber)
                         }
                     }
                 } catch (_: Exception) { }
             }
-
-
         }
     }
 }

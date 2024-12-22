@@ -35,7 +35,7 @@ fun GoStudyApp(
     { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Route.SignUp,
+            startDestination = Route.Home,
             modifier = Modifier.padding(innerPadding)
         ) { navGraph(appState) }
     }

@@ -66,7 +66,7 @@ class SignUpViewModel @Inject constructor(
                     throw IllegalArgumentException("GroupDto number do not match")
                 }
 
-                accountService.createAccount(uiState.value.currentEmail, uiState.value.currentPassword, uiState.value.currentGroupNumber)
+                accountService.createAccount(uiState.value.currentEmail, uiState.value.currentPassword, uiState.value.currentGroupNumber, uiState.value.selectedSubgroupNumber ?: "а")
 
                 navigateOnSuccess(Route.Home, Route.SignUp)
             }
